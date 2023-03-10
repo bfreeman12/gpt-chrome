@@ -3,10 +3,6 @@ const apiKeyInput = document.getElementById("apiKeyInput");
 const queryInput = document.getElementById("queryInput");
 const querySubmit = document.getElementById("querySubmit");
 
-apiKeySubmit.onclick = () => {
-  chrome.storage.local.set({ apikey: apiKeyInput.value });
-};
-
 querySubmit.onclick = () => {
   const prefs = {
     queryInput: queryInput.value,
@@ -17,7 +13,7 @@ querySubmit.onclick = () => {
 
 chrome.runtime.onMessage.addListener((data) => {
   let responseText = JSON.stringify(data["gptResponseData"]);
-  const formattedResponseText = responseText.replaceAll("\\n", " ");
+  const formattedResponseText = responseText.replaceAll("\\n", "");
   const newformattedResponseText = formattedResponseText.replaceAll("\\", "");
   const gptResponseP = document.getElementById("gptResponse");
   gptResponseP.innerHTML = newformattedResponseText;
