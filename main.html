@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GPT Extension</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2 id="gptTitle">ChatGPT</h2>
+    <input
+      id="apiKeyInput"
+      placeholder="Enter ChatGPT api key"
+      type="password"
+    />
+    <button id="apiKeySubmit" action="none">login</button>
+    <h5>Ask a question!</h5>
+    <textarea id="queryInput"></textarea>
+    <button id="querySubmit" action="none">ask!</button>
+    <h5 id="responseTitle">Response</h5>
+    <p id="gptResponse"></p>
+  </body>
+
+  <script src="main.js"></script>
+</html>
