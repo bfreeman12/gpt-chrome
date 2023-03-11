@@ -6,6 +6,7 @@ const toClipboard = document.getElementById("toClipboard");
 const gptResponseP = document.getElementById("gptResponse");
 const responseWrapper = document.getElementById("responseWrapper");
 
+window.onload = () => {
 apiKeySubmit.onclick = () =>{
   const apiKeyValue = apiKeyInput.value
   chrome.storage.local.set({'apikey':apiKeyValue})
@@ -33,4 +34,4 @@ chrome.runtime.onMessage.addListener((data) => {
     return element;
   }
   responseWrapper.appendChild(copyButton())
-});
+});}
