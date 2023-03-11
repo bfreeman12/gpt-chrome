@@ -4,11 +4,15 @@ const queryInput = document.getElementById("queryInput");
 const querySubmit = document.getElementById("querySubmit");
 const toClipboard = document.getElementById("toClipboard");
 const gptResponseP = document.getElementById("gptResponse");
+const responseWrapper = document.getElementById("responseWrapper");
 
+apiKeySubmit.onclick = () =>{
+  const apiKeyValue = apiKeyInput.value
+  chrome.storage.local.set({'apikey':apiKeyValue})
+}
 querySubmit.onclick = () => {
   const prefs = {
     queryInput: queryInput.value,
-    apikey: apiKeyInput.value,
   };
   chrome.runtime.sendMessage({ event: "initQuery", prefs });
 };
@@ -18,11 +22,15 @@ chrome.runtime.onMessage.addListener((data) => {
   const formattedResponseText = responseText.replaceAll("\\n", "");
   const newformattedResponseText = formattedResponseText.replaceAll("\\", "");
   gptResponseP.innerHTML = newformattedResponseText;
+  function copyButton() {
+    var element = document.createElement('button')
+    element.id = 'toClipboard'
+    element.innerHTML = 'Copy'
+    element.onclick = () => {
+      const valueToBeCopied = gptResponseP.textContent;
+      navigator.clipboard.writeText(valueToBeCopied);
+    };
+    return element;
+  }
+  responseWrapper.appendChild(copyButton())
 });
-
-// in the future will need something to hide the api key input and save
-// the api locally
-toClipboard.onclick = () => {
-  const valueToBeCopied = gptResponseP.textContent;
-  navigator.clipboard.writeText(valueToBeCopied);
-};
