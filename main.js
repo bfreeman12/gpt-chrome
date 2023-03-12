@@ -7,31 +7,34 @@ const gptResponseP = document.getElementById("gptResponse");
 const responseWrapper = document.getElementById("responseWrapper");
 
 window.onload = () => {
-apiKeySubmit.onclick = () =>{
-  const apiKeyValue = apiKeyInput.value
-  chrome.storage.local.set({'apikey':apiKeyValue})
-}
-querySubmit.onclick = () => {
-  const prefs = {
-    queryInput: queryInput.value,
-  };
-  chrome.runtime.sendMessage({ event: "initQuery", prefs });
-};
-
-chrome.runtime.onMessage.addListener((data) => {
-  let responseText = JSON.stringify(data["gptResponseData"]);
-  const formattedResponseText = responseText.replaceAll("\\n", "");
-  const newformattedResponseText = formattedResponseText.replaceAll("\\", "");
-  gptResponseP.innerHTML = newformattedResponseText;
-  function copyButton() {
-    var element = document.createElement('button')
-    element.id = 'toClipboard'
-    element.innerHTML = 'Copy'
-    element.onclick = () => {
-      const valueToBeCopied = gptResponseP.textContent;
-      navigator.clipboard.writeText(valueToBeCopied);
-    };
-    return element;
+  apiKeySubmit.onclick = () => {
+    const apiKeyValue = apiKeyInput.value
+    chrome.storage.local.set({ 'apikey': apiKeyValue })
   }
-  responseWrapper.appendChild(copyButton())
-});}
+  querySubmit.onclick = () => {
+    const prefs = {
+      queryInput: queryInput.value,
+    };
+    chrome.runtime.sendMessage({ event: "initQuery", prefs });
+  };
+
+  chrome.runtime.onMessage.addListener((data) => {
+    let responseText = JSON.stringify(data["gptResponseData"]);
+    const formattedResponseText = responseText.replaceAll("\\n", "");
+    const newformattedResponseText = formattedResponseText.replaceAll("\\", "");
+    gptResponseP.innerText = newformattedResponseText;
+    function copyButton() {
+      var element = document.createElement('button')
+      element.id = 'toClipboard'
+      element.innerHTML = 'Copy'
+      element.onclick = () => {
+        const valueToBeCopied = gptResponseP.textContent;
+        navigator.clipboard.writeText(valueToBeCopied);
+      };
+      return element;
+    }
+    if (!document.getElementById('toClipboard')) {
+      responseWrapper.appendChild(copyButton())
+    }
+  });
+}

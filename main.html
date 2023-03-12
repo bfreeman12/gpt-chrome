@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GPT Extension</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h2 id="gptTitle">ChatGPT</h2>
-    <input
-      id="apiKeyInput"
-      placeholder="Enter ChatGPT api key"
-      type="password"
-    />
-    <button id="apiKeySubmit" action="none">login</button>
-    <h5>Ask a question!</h5>
-    <textarea id="queryInput"></textarea>
-    <button id="querySubmit" action="none">ask!</button>
-    <div id="responseWrapper">
-    <p id="gptResponse"></p>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPT Extension</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="flex">
+    <div class="flex">
+      <h2 id="gptTitle">ChatGPT</h2>
+      <input id="apiKeyInput" placeholder="Enter ChatGPT api key" type="password" />
+      <button id="apiKeySubmit" action="none">Login</button>
     </div>
-    <script src="main.js"></script>
-  </body>
+    <div class="topBorder">
+      <h3>GPT Prompt:</h3>
+      <textarea id="queryInput"></textarea>
+      <button id="querySubmit" action="none">Submit</button>
+      <div id="responseWrapper">
+        <p id="gptResponse"></p>
+      </div>
+      <script src="main.js"></script>
+    </div>
+  </div>
+</body>
+
 </html>
