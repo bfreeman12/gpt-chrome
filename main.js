@@ -21,7 +21,7 @@ window.onload = () => {
   chrome.runtime.onMessage.addListener((data) => {
     let responseText = JSON.stringify(data["gptResponseData"]);
     const formattedResponseText = responseText.replaceAll("\\n", "");
-    const newformattedResponseText = formattedResponseText.replaceAll("\\", "");
+    const newformattedResponseText = formattedResponseText.replaceAll("\\", "").slice(1,-1);
     gptResponseP.innerText = newformattedResponseText;
     function copyButton() {
       var element = document.createElement('button')
